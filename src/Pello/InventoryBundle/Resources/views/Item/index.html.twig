@@ -1,0 +1,17 @@
+{% extends "PelloInventoryBundle:Default:layout.html.twig" %}
+{% block title %}Blog sample::Index{% endblock %}
+{% block body %}
+<h2>{% trans %}Items{% endtrans %} <span class="glyphicon glyphicon-heart"></span></h2>
+
+<div class="table-responsive">
+  <table class="table .table-condensed">
+     <div id='items'>
+        {% for item in items %}
+            {# % include "CuatrovientosArteanBundle:Center:center.html.twig" % #}
+            <div class="item">{{ item.id }}: {{ item.name }}</div>
+        {% endfor %}
+    </div>
+  </table>
+</div>
+
+{% endblock %}

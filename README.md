@@ -26,3 +26,24 @@ symfony new symfony3-crud-restapi-auth
 ```
 php bin/console generate:bundle --namespace=Acme/TestBundle
 ```
+## Change cache perm
+In var directory with www-data user (apache)
+```
+chown www-data:www-data var/cache -R
+chown www-data:www-data var/sessions -R
+chown www-data:www-data var/logs -R
+```
+You may also try chmod 777
+
+# Run
+From console using
+```
+php bin/console server:run
+```
+
+Point to [http://localhost:8000]
+
+# Config db parameters
+app/config/parameters.yml
+
+
