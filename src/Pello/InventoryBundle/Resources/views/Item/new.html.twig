@@ -1,0 +1,11 @@
+
+{% extends "PelloInventoryBundle:Default:layout.html.twig" %}
+{% block title %}Inventory Sample::Detail{% endblock %}
+{% block body %}
+
+Simple
+<form method="post" action="{{ path('item_new_save') }}">
+   {{ form_widget(form) }}
+</form>
+
+{% endblock %}

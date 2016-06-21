@@ -26,4 +26,21 @@ class ItemBusiness {
         return $this->itemDAO->selectAll();
     }
     
+    /**
+     * Selects item by id
+     * @param type $id
+     * @return type
+     */
+    public function selectById($id) {
+        return $this->itemDAO->selectById($id);
+    }
+    
+     /**
+     * Selects item by id
+     * @param type $id
+     * @return type
+     */
+    public function remove(Item $item) {
+        return $this->itemDAO->remove($item);
+    }
 }

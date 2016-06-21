@@ -1,0 +1,17 @@
+{% extends "PelloInventoryBundle:Default:layout.html.twig" %}
+{% block title %}Inventory Sample::Delete item{% endblock %}
+{% block body %}
+<h2>{% trans %}Item delete{% endtrans %} <span class="glyphicon glyphicon-heart"></span></h2>
+
+<div class="table-responsive">
+ <div id='item'>
+		<div>
+			{% trans %}Are you sure?{% endtrans %}			
+			<div class='title'>{{ item.name }}</div>
+			<div><a href="{{ path('item_delete_confirm',  {'id': item.id }) }}">Confirm deletion</a> </div>
+			<div><a href="javascript:history.back()">Cancel</a> </div>
+		</div>
+</div>
+</div>
+
+{% endblock %}

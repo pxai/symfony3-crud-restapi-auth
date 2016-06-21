@@ -1,0 +1,10 @@
+{% extends "PelloInventoryBundle:Default:layout.html.twig" %}
+{% block title %}Inventory Sample::Detail{% endblock %}
+{% block body %}
+
+<h3>Update item: {{ id }}</h3>
+<form method="post" action="{{ path('item_update_save') }}">
+    {{ form_widget(form) }}
+</form>
+
+{% endblock %}

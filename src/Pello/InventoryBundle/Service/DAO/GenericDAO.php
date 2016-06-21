@@ -47,9 +47,8 @@ abstract class GenericDAO {
      * @param Item $entity
      */
     public function create($entity) {
-        $em = $this->getDoctrine()->getEntityManager();
-        $em->merge($entity);
-        $em->flush();
+        $this->em->merge($entity);
+        $this->em->flush();
         
         return $entity->getId();
     }
@@ -59,9 +58,8 @@ abstract class GenericDAO {
      * @param $entity
      */
     public function update ($entity) {
-        $em = $this->getDoctrine()->getEntityManager();
-        $em->merge($entity);
-        $em->flush();        
+        $this->em->merge($entity);
+        $this->em->flush();        
     }
     
     /**
@@ -69,9 +67,8 @@ abstract class GenericDAO {
      * @param $entity
      */
     public function remove ($entity) {
-       $em = $this->getDoctrine()->getEntityManager();
-       $em->remove($entity);
-       $em->flush();
+       $this->em->remove($entity);
+       $this->em->flush();
     }
 
 }
