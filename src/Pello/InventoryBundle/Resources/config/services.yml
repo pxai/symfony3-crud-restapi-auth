@@ -2,3 +2,13 @@ services:
 #    pello_inventory.example:
 #        class: Pello\InventoryBundle\Example
 #        arguments: ["@service_id", "plain_value", %parameter%]
+    inventory.security.sha1_password_encoder:
+        class: Pello\InventoryBundle\Security\Encoder\Sha1PasswordEncoder
+    
+    pello_inventory.dao.item:
+         class: Pello\InventoryBundle\Service\DAO\ItemDAO
+         arguments: ['PelloInventoryBundle:Item', '@doctrine.orm.entity_manager' ]
+
+    pello_inventory.bo.item:
+         class: Pello\InventoryBundle\Service\Business\ItemBusiness
+         arguments: ['@pello_inventory.dao.item']
