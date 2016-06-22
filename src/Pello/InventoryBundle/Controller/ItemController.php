@@ -45,7 +45,8 @@ class ItemController extends Controller
      */
     public function itemNewSaveAction(Item $item)
     {
-        return $this->render('PelloInventoryBundle:Item:newSave.html.twig');
+         $this->get("pello_inventory.bo.item")->create($item);
+        return $this->render('PelloInventoryBundle:Item:newSave.html.twig',array("item"=>$item));
     }
 
     
