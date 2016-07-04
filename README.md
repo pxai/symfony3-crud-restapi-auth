@@ -1,6 +1,18 @@
 # symfony3-crud-restapi-auth
 Complete Symfony 3 crud sample with crud and rest api with authentification
 
+OK  Symfony 3.1.2 was successfully installed. Now you can:
+
+    * Change your current directory to C:\xampp\htdocs\sample
+
+    * Configure your application in app/config/parameters.yml file.
+
+    * Run your application:
+        1. Execute the php bin/console server:run command.
+        2. Browse to the http://localhost:8000 URL.
+
+    * Read the documentation at http://symfony.com/doc
+    
 # Prepare from scratch
 ## Symfony instalation
 ```
