@@ -19,6 +19,11 @@ OK  Symfony 3.1.2 was successfully installed. Now you can:
     app:
     resource: "@PelloInventoryBundle/Controller/"
     type:     annotation
+# Set up services
+    Don't forget to set services in app/config/services.yml
+    # app/config/config.yml
+imports:
+    - { resource: '@AcmeHelloBundle/Resources/config/services.yml' }
 # Prepare from scratch
 ## Symfony instalation
 ```

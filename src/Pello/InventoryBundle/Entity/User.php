@@ -9,7 +9,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @ORM\Entity(repositoryClass="Pello\InventoryBundle\EntityRepository\UserRepository")
  * @ORM\Table(name="user")
  */
-class User implements UserInterface, \Serializable
+class User extends Entity implements UserInterface, \Serializable
 {
     /**
      * @ORM\Column(name="id",type="integer")

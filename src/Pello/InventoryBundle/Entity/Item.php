@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="Pello\InventoryBundle\EntityRepository\ItemRepository")
  * @ORM\Table(name="item")
  */
-class Item
+class Item extends Entity
 {
     /**
      * @ORM\Column(name="id",type="integer")
