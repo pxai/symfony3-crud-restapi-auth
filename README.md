@@ -13,6 +13,12 @@ OK  Symfony 3.1.2 was successfully installed. Now you can:
 
     * Read the documentation at http://symfony.com/doc
     
+    
+    Don't forget to add Bundle in app/KernelApp.php
+    and to add routes in routes.yml 
+    app:
+    resource: "@PelloInventoryBundle/Controller/"
+    type:     annotation
 # Prepare from scratch
 ## Symfony instalation
 ```
