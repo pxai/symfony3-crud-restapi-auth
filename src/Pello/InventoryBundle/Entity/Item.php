@@ -40,6 +40,7 @@ class Item extends Entity
 
     
     public function __construct () {
+        $this->lastUpdate = new \DateTime();
     }
 
     /**

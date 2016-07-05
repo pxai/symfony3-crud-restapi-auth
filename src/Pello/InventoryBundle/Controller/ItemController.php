@@ -4,6 +4,8 @@ namespace Pello\InventoryBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\HttpFoundation\Request;
 use Pello\IventoryBundle\Repository\ItemRepository;
 use Pello\InventoryBundle\Form\Type\ItemType;
 use Pello\InventoryBundle\Entity\Item;
@@ -39,14 +41,24 @@ class ItemController extends Controller
         return $this->render('PelloInventoryBundle:Item:new.html.twig', array('form'=> $form->createView()));
     }
 
-         /**
+     /**
      * 
      * @Route("/admin/item/new/save", name="item_new_save")
+     * @Method({"POST"})
      */
-    public function itemNewSaveAction(Item $item)
+    public function itemNewSaveAction(Request $request)
     {
-         $this->get("pello_inventory.bo.item")->create($item);
-        return $this->render('PelloInventoryBundle:Item:newSave.html.twig',array("item"=>$item));
+        $form = $this->createForm(ItemType::class, new Item());
+        $form->handleRequest($request);
+            
+        if ($form->isValid()) {
+            $item = $form->getData();
+            $this->get("pello_inventory.bo.item")->create($item);
+            $response =  $this->render('PelloInventoryBundle:Item:newSave.html.twig', array('item' => $item));               
+        } else {
+            $response = $this->render('PelloInventoryBundle:Item:new.html.twig', array('form'=> $form->createView()));
+        }
+        return $response;
     }
 
     
@@ -54,22 +66,37 @@ class ItemController extends Controller
      * 
      * @Route("/admin/item/update/{id}", name="item_update")
      */
-    public function itemUpdateAction()
+    public function itemUpdateAction($id)
     {
-        $item = $this->get("pello_inventory.bo.item")->selectById($id);
-        return $this->render('PelloInventoryBundle:Item:update.html.twig',array("item"=>$item));
+       $item = $this->get("pello_inventory.bo.item")->selectById($id);
+       $form = $this->createForm(ItemType::class, $item);
+       return $this->render('PelloInventoryBundle:Item:update.html.twig',array("form"=> $form->createView()));
     }
 
     
-        /**
+     /**
      * 
      * @Route("/admin/item/update/save", name="item_update_save")
+     * @Method({"POST"})
      */
-    public function itemUpdateSaveAction(Item $item)
+    public function itemUpdateSaveAction(Request $request)
     {
-        $item = $this->get("pello_inventory.bo.item")->selectById($id);
-        return $this->render('PelloInventoryBundle:Item:detail.html.twig',array("item"=>$item));
+       $form = $this->createForm(ItemType::class, new Item());
+       $form->handleRequest($request);
+            
+        if ($form->isValid()) {
+            $item = $form->getData();
+            print_r($item);
+            $this->get("pello_inventory.bo.item")->update($item);
+            $response =  $this->forward('PelloInventoryBundle:Item:detail.html.twig', array('item' => $item));               
+            //return $this->indexAction();
+        } else {
+            $response = $this->render('PelloInventoryBundle:Item:update.html.twig', array('form'=> $form->createView()));
+        }
+        return $response;   
+        
     }
+    
     /**
      * 
      * @Route("/admin/item/delete/{id}", name="item_delete")
@@ -78,7 +105,6 @@ class ItemController extends Controller
     {
         $item = $this->get("pello_inventory.bo.item")->selectById($id);
         return $this->render('PelloInventoryBundle:Item:delete.html.twig',array("item"=>$item));    
-        
     }
     
      /**

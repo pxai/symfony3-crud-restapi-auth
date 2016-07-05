@@ -35,8 +35,8 @@ class GenericBusiness {
         return $this->entityDAO->selectById($id);
     }
     
-         /**
-     * Selects item by id
+     /**
+     * creates entity
      * @param type $id
      * @return type
      */
@@ -45,7 +45,7 @@ class GenericBusiness {
     }
     
      /**
-     * Selects item by id
+     * Removes entity
      * @param type $id
      * @return type
      */

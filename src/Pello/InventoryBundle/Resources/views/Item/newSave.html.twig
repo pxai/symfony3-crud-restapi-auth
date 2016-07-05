@@ -1,9 +1,10 @@
 
 {# src/Samples/BlogBundle/Resources/views/simple.html.twig #}
-{% extends "CuatrovientosArteanBundle:Default:layout.html.twig" %}
-{% block title %}Artean::Save Center{% endblock %}
+
+{% extends "PelloInventoryBundle:Default:layout.html.twig" %}
+{% block title %}Inventory Sample::Detail{% endblock %}
 {% block body %}
-Hello, saved new Center 
- <strong>{{ center.name }}</strong>
- <div><a href="{{ path('cuatrovientos_artean_center') }}">{% trans %}See all{% endtrans %}</a> </div>
+Hello, saved new Item 
+ <strong>{{ item.name }}</strong>
+ <div><a href="{{ path('item_index') }}">{% trans %}See all{% endtrans %}</a> </div>
 {% endblock %}
