@@ -64,33 +64,36 @@ class ItemController extends Controller
     
     /**
      * 
-     * @Route("/admin/item/update/{id}", name="item_update")
+     * @Route("/admin/item/update/{id}", name="item_update", requirements={
+     *     "id": "\d+"}))
      */
     public function itemUpdateAction($id)
     {
        $item = $this->get("pello_inventory.bo.item")->selectById($id);
        $form = $this->createForm(ItemType::class, $item);
-       return $this->render('PelloInventoryBundle:Item:update.html.twig',array("form"=> $form->createView()));
+       return $this->render('PelloInventoryBundle:Item:update.html.twig',array("form"=> $form->createView(),'msg'=> 'yes'));
     }
 
     
      /**
      * 
      * @Route("/admin/item/update/save", name="item_update_save")
-     * @Method({"POST"})
+     * Method({"POST"})
      */
     public function itemUpdateSaveAction(Request $request)
     {
        $form = $this->createForm(ItemType::class, new Item());
        $form->handleRequest($request);
-            
+
         if ($form->isValid()) {
+
             $item = $form->getData();
-            print_r($item);
+
             $this->get("pello_inventory.bo.item")->update($item);
-            $response =  $this->forward('PelloInventoryBundle:Item:detail.html.twig', array('item' => $item));               
-            //return $this->indexAction();
+            //$response =  $this->forward('PelloInventoryBundle:Item:detail.html.twig', array('item' => $item));               
+            return $this->indexAction();
         } else {
+
             $response = $this->render('PelloInventoryBundle:Item:update.html.twig', array('form'=> $form->createView()));
         }
         return $response;   

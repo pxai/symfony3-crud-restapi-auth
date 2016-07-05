@@ -37,13 +37,21 @@ class GenericBusiness {
     
      /**
      * creates entity
-     * @param type $id
-     * @return type
+     * @param type $entity
+     * @return id
      */
     public function create (Entity $entity) {
         return $this->entityDAO->create($entity);
     }
-    
+  
+      /**
+     * updates entity
+     * @param type $entity
+     * @return type
+     */
+    public function update (Entity $entity) {
+        return $this->entityDAO->update($entity);
+    }
      /**
      * Removes entity
      * @param type $id
