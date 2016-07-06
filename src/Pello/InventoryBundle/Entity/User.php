@@ -33,10 +33,18 @@ class User extends Entity implements UserInterface, \Serializable
      */
     private $email;
 
-
+   /**
+     * @ManyToMany(targetEntity="Role")
+     * @JoinTable(name="user_roles",
+     *      joinColumns={@JoinColumn(name="iduser", referencedColumnName="id")},
+     *      inverseJoinColumns={@JoinColumn(name="idrole", referencedColumnName="id", unique=true)}
+     *      )
+     */
+    private $roles;
 
     public function __construct () {
         $this->since = time();
+        $this->roles = array();
     }
 
     public function randPassword( $length = 8, $chars = 'abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789' ) {
@@ -124,4 +132,7 @@ class User extends Entity implements UserInterface, \Serializable
         $this->email = $email;
     }
 
+    public function setRoles ($roles) {
+        $this->roles = $roles;
+    }
 }
