@@ -1,5 +1,6 @@
 <?php
 
+
 namespace Pello\InventoryBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;

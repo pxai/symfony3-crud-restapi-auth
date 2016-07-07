@@ -70,3 +70,13 @@ Point to [http://localhost:8000]
 app/config/parameters.yml
 
 
+# Install object serializer
+You can install the component in 2 different ways:
+
+-Install it via Composer (symfony/serializer on Packagist);
+-Use the official Git repository (https://github.com/symfony/serializer).
+
+```
+$ composer require symfony/serializer
+```
+
