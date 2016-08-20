@@ -6,12 +6,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
-use Pello\IventoryBundle\Repository\ItemRepository;
+
+
 use Pello\InventoryBundle\Form\Type\ItemType;
 use Pello\InventoryBundle\Entity\Item;
 
 class ItemController extends Controller
 {
+
+    
     /**
      * @Route("/admin/item", name="item_index")
      */
