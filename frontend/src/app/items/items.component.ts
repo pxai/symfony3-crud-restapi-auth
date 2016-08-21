@@ -9,25 +9,26 @@ import { Item } from './item';
   styleUrls: ['./items.component.scss']
 })
 export class ItemsComponent implements OnInit {
-  private title: string = 'Items';
+  public title: string = 'Items';
   private message: string = 'Items message';
   private _ItemsService: ItemsService;
-  private errorMessage: string
+  public errorMessage: string;
   public items: Item[] = [];
-  
+
   constructor(ItemsService: ItemsService) {
    this._ItemsService = ItemsService;
   }
- 
+
   public ngOnInit() {
-        this.getItems();    
+        this.getItems();
         console.log('Hello Items: ' + this.message + ': ' + this.items.length);
   }
 
   private getItems () {
        this._ItemsService.getItems().subscribe(
                        items => this.items = items,
-                       error =>  this.errorMessage = <any>error);
+                       error => this.errorMessage = <any>error,
+                       () => console.log('Working now'));
   }
 
 }
