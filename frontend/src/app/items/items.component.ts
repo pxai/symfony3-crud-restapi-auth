@@ -9,10 +9,10 @@ import { Item } from './item';
   styleUrls: ['./items.component.scss']
 })
 export class ItemsComponent implements OnInit {
-  private title: String = 'Items';
-  private message: String = 'Items message';
+  private title: string = 'Items';
+  private message: string = 'Items message';
   private _ItemsService: ItemsService;
-  private errorMessage: String
+  private errorMessage: string
   public items: Item[] = [];
   
   constructor(ItemsService: ItemsService) {
