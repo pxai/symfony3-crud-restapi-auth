@@ -35,6 +35,8 @@ class ItemApiController extends Controller
         $items = $this->get("pello_inventory.bo.item")->selectAll();
         $response = new Response($this->serializer->serialize($items, 'json'));
         $response->headers->set('Content-Type','application/json');
+        $response->headers->set('Access-Control-Allow-Headers', 'origin, content-type, accept');
+        $response->headers->set('Access-Control-Allow-Origin', '*');
         return $response;
     }
 
