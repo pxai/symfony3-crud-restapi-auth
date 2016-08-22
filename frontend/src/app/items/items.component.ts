@@ -14,6 +14,7 @@ export class ItemsComponent implements OnInit {
   private _ItemsService: ItemsService;
   public errorMessage: string;
   public items: Item[] = [];
+  private item: Item;
 
   constructor(ItemsService: ItemsService) {
    this._ItemsService = ItemsService;
@@ -21,6 +22,7 @@ export class ItemsComponent implements OnInit {
 
   public ngOnInit() {
         this.getItems();
+        //this.getItem(2);
         console.log('Hello Items: ' + this.message + ': ' + this.items.length);
   }
 
@@ -29,6 +31,14 @@ export class ItemsComponent implements OnInit {
                        items => this.items = items,
                        error => this.errorMessage = <any>error,
                        () => console.log('Working now'));
+  }
+
+
+  private getItem (id: number) {
+       this._ItemsService.getItem(id).subscribe(
+                       item => this.item = item,
+                       error => this.errorMessage = <any>error,
+                       () => console.log('Working now, one item'));
   }
 
 }

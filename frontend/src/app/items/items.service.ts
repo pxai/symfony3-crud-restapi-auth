@@ -16,6 +16,7 @@ export class ItemsService {
   private http: Http;
   private items: Item[] = [{id: 1, name: 'epa', description: 'epa1'}, {id: 2, name:'epa2', description: 'epa2'}];
   private itemsUrl: string = 'http://localhost/symfony3-crud-restapi-auth/web/app_dev.php/admin/api/item';
+  private itemUrl: string = 'http://localhost/symfony3-crud-restapi-auth/web/app_dev.php/admin/api/item/detail';
 
   constructor (http: Http) {
     this.http = http;
@@ -50,6 +51,16 @@ export class ItemsService {
                     .catch(this.handleError);
   }
 
+/**
+* gets just one item
+*/
+public getItem(id: number): Observable<Item> {
+  return this.http.get(this.itemUrl + '/' + id)
+                  .map(res => res.json())
+                  .catch(this.handleError);
+}
+
+// As seen on angular.io, but not working
   private extractData(res: Response) {
     let body = res.json();
     return body.data || { };
