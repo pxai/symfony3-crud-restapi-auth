@@ -3,7 +3,7 @@ import { ItemsService } from './items.service';
 import { Item } from './item';
 
 @Component({
-  selector: 'my-artean-items',
+  selector: 'my-items',
   providers: [ItemsService],
   templateUrl: './items.component.html',
   styleUrls: ['./items.component.scss']
