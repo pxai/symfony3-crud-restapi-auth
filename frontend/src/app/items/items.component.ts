@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ItemsService } from './items.service';
 import { Item } from './item';
+import { ItemFormComponent } from './item-form.component';
 
 @Component({
   selector: 'my-items',
-  providers: [ItemsService],
+  providers: [ItemsService, ItemFormComponent],
   templateUrl: './items.component.html',
   styleUrls: ['./items.component.scss']
 })

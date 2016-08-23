@@ -1,7 +1,7 @@
 <div>
-            {{title}} - {{errorMessage}}
+     {{title}} - {{errorMessage}}
             <div class="new">
-              <my-items-form>
+              oki<my-items-form>
               </my-items-form>
             </div>
             <div>
@@ -12,6 +12,8 @@
                     <th>Name</th>
                     <th>Description</th>
                     <th>Detail</th>
+                    <th>Update</th>
+                    <th>Delete</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -20,6 +22,8 @@
                     <td>{{item.name}}</td>
                     <td>{{item.description}}</td>
                     <td><button (click)="getItem(item.id)">Detail</button></td>
+                    <td><button (click)="updateItem(item.id)">Update</button></td>
+                    <td><button (click)="deleteItem(item.id)">Delete</button></td>
                   </tr>
                 </tbody>
                 <tfoot>
