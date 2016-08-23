@@ -1,6 +1,6 @@
 import { Http, Response } from '@angular/http';
-import {Headers} from '@angular/http';
-import {Observable} from "rxjs/Rx";
+// import {Headers} from '@angular/http';
+import {Observable} from 'rxjs/Rx';
 
 import 'rxjs/add/operator/map';
 import { Injectable } from '@angular/core';
@@ -14,7 +14,7 @@ import {Item} from './item';
 export class ItemsService {
   public title: string = 'Angular 2';
   private http: Http;
-  private items: Item[] = [{id: 1, name: 'epa', description: 'epa1'}, {id: 2, name:'epa2', description: 'epa2'}];
+//  private items: Item[] = [{id: 1, name: 'epa', description: 'epa1'}, {id: 2, name:'epa2', description: 'epa2'}];
   private itemsUrl: string = 'http://localhost/symfony3-crud-restapi-auth/web/app_dev.php/admin/api/item';
   private itemUrl: string = 'http://localhost/symfony3-crud-restapi-auth/web/app_dev.php/admin/api/item/detail';
 
@@ -36,16 +36,17 @@ export class ItemsService {
   }*/
       // With a promise
     // HAU IZAN BEAHRKO
-   //return Promise.resolve(this.http.get("http://localhost/symfony3-crud-restapi-auth/web/app_dev.php/admin/api/item").map(result => result.json()));
-   //return Promise.resolve(this.http.get("http://localhost/symfony3-crud-restapi-auth/web/app_dev.php/admin/api/item"));
+   // return Promise.resolve(this.http.get("http://localhost/symfony3-crud-restapi-auth/web/app_dev.php/admin/api/item")
+   // .map(result => result.json()));
+   // return Promise.resolve(this.http.get("http://localhost/symfony3-crud-restapi-auth/web/app_dev.php/admin/api/item"));
 
     // With static data works..
     // return Promise.resolve(this.items);
 
-      //.map(result => result.json());
+      // .map(result => result.json());
       // then instead of subscribe use then();
-        //return this.http.get("http://localhost/symfony3-crud-restapi-auth/web/app_dev.php/admin/api/item")
-       //.map(result => result.json());
+        // return this.http.get("http://localhost/symfony3-crud-restapi-auth/web/app_dev.php/admin/api/item")
+       // .map(result => result.json());
     return this.http.get(this.itemsUrl)
                     .map(res => res.json())
                     .catch(this.handleError);

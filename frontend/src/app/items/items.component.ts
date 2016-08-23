@@ -5,7 +5,8 @@ import { ItemFormComponent } from './item-form.component';
 
 @Component({
   selector: 'my-items',
-  providers: [ItemsService, ItemFormComponent],
+  providers: [ItemsService],
+  directives: [ItemFormComponent],
   templateUrl: './items.component.html',
   styleUrls: ['./items.component.scss']
 })
