@@ -7,16 +7,18 @@ import { Item }    from './item';
 export class ItemFormComponent {
   status = ['Really Smart', 'Super Flexible',
             'Super Hot', 'Weather Changer'];
-  model: Item;
+  model = {'id': 0, 'name': '', 'description': ''};
   submitted = false;
+  active = true;
+
   onSubmit() { this.submitted = true; }
   // Reset the form with a new hero AND restore 'pristine' class state
   // by toggling 'active' flag which causes the form
   // to be removed/re-added in a tick via NgIf
   // TODO: Workaround until NgForm has a reset method (#6822)
-  active = true;
-  newHero() {
-    //this.model = new Hero(42, '', '');
+
+  newItem () {
+    // this.model; = new Item(42, 'AA', 'bb');
     this.active = false;
   }
 }

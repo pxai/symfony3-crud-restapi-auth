@@ -24,7 +24,7 @@ export class ItemsComponent implements OnInit {
 
   public ngOnInit() {
         this.getItems();
-        //this.getItem(2);
+        // this.getItem(2);
         console.log('Hello Items: ' + this.message + ': ' + this.items.length);
   }
 

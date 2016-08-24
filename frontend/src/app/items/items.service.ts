@@ -62,10 +62,10 @@ public getItem(id: number): Observable<Item> {
 }
 
 // As seen on angular.io, but not working
-  private extractData(res: Response) {
+  /*private extractData(res: Response) {
     let body = res.json();
     return body.data || { };
-  }
+  }*/
 
   private handleError (error: any) {
     // In a real world app, we might use a remote logging infrastructure

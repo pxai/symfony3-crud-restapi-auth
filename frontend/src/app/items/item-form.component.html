@@ -1,37 +1,13 @@
 <button (click)="submitted=true">New item</button>
 <div  [hidden]="submitted">
-  <h1>Hero Form</h1>
-  <form *ngIf="active" (ngSubmit)="onSubmit()" #itemForm="ngForm">
-    <div class="form-group">
-      <label for="name">Name</label>
-      <input type="text" class="form-control" id="name"
-             required
-             [(ngModel)]="model.name" name="name"
-             #name="ngModel" >
-      <div [hidden]="name.valid || name.pristine"
-           class="alert alert-danger">
-        Name is required
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="description">Description</label>
-      <input type="text" class="form-control" id="description"
-             [(ngModel)]="model.description" name="description" >
-    </div>
-    <div class="form-group">
-      <label for="status">Status</label>
-      <select class="form-control" id="status"
-              required
-              [(ngModel)]="model.status" name="status"
-              #power="ngModel" >
-        <option *ngFor="let s of status" [value]="s">{{s}}</option>
-      </select>
-      <div [hidden]="status.valid || status.pristine" class="alert alert-danger">
-        Status is required
-      </div>
-    </div>
-    <button type="submit" class="btn btn-default" [disabled]="!itemForm.form.valid">Submit</button>
-    <button type="button" class="btn btn-default" (click)="newItem()">New Item</button>
+  <h1>Item Form</h1>
+  <form>
+    <input [(ngModel)]="model.name"
+            type="text"
+            id="name"
+            name="name" >
+            <p> valid: {{ name.valid }} </p>
+            <p> value: {{ name.value }} </p>
   </form>
 </div>
 <div [hidden]="!submitted">
