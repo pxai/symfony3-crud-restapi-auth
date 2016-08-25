@@ -1,24 +1,47 @@
 import { Component } from '@angular/core';
+import {
+  REACTIVE_FORM_DIRECTIVES,
+  FormGroup,
+  FormBuilder,
+  FormControl
+} from '@angular/forms';
+
 import { Item }    from './item';
 @Component({
   selector: 'my-items-form',
-  templateUrl: './item-form.component.html'
+  templateUrl: './item-form.component.html',
+  directives: [REACTIVE_FORM_DIRECTIVES]
 })
 export class ItemFormComponent {
-  status = ['Really Smart', 'Super Flexible',
-            'Super Hot', 'Weather Changer'];
+
   model = {'id': 0, 'name': '', 'description': ''};
-  submitted = false;
-  active = true;
+  isVisible: boolean = false;
+  private itemForm: FormGroup;
+  private id: FormControl;
+  private name: FormControl;
+  private description: FormControl;
+  private status: FormControl;
 
-  onSubmit() { this.submitted = true; }
-  // Reset the form with a new hero AND restore 'pristine' class state
-  // by toggling 'active' flag which causes the form
-  // to be removed/re-added in a tick via NgIf
-  // TODO: Workaround until NgForm has a reset method (#6822)
+  constructor (builder: FormBuilder) {
+    this.id = new FormControl('', []);
+    this.name = new FormControl('', []);
+    this.description = new FormControl('', []);
+    this.status = new FormControl('', []);
+    this.itemForm = builder.group({
+      id: this.id,
+      name: this.name,
+      description: this.description,
+      status: this.status
+    });
+  }
 
-  newItem () {
-    // this.model; = new Item(42, 'AA', 'bb');
-    this.active = false;
+  public save () {
+    console.log('Saving form');
+    console.log(this.name);
+  }
+
+  public toggleForm () {
+    this.isVisible = !this.isVisible;
+    console.log('Set to... ' + this.isVisible);
   }
 }

@@ -1,13 +1,18 @@
-<button (click)="submitted=true">New item</button>
-<div  [hidden]="submitted">
-  <h1>Item Form</h1>
-  <form>
-    <input [(ngModel)]="model.name"
-            type="text"
-            id="name"
-            name="name" >
-            <p> valid: {{ name.valid }} </p>
-            <p> value: {{ name.value }} </p>
-            <button class="btn btn-default" (click)="submitted=false">Edit</button>
-  </form>
+<button (click)="toggleForm()">New item</button>
+<div  [hidden]="!isVisible">
+  <form [formGroup]="itemForm" (ngSubmit)="save()">
+
+  <input type="hidden" name="id" id="id" [formControl]="id">
+
+  <label for="name">Name</label>
+  <input type="text" name="name" id="name" [formControl]="name">
+
+  <label for="description">Description</label>
+  <input type="text" name="description" id="description" [formControl]="description">
+
+  <label for="status">Status</label>
+  <input type="text" name="status" id="status" [formControl]="status" >
+
+  <button type="submit" [disabled]="!itemForm.valid">Create</button>
+</form>
 </div>
