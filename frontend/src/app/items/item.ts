@@ -7,7 +7,7 @@ export class Item {
 
   constructor (private id: number,
                private name: string,
-               private description:
-               private string, status: number) { }
+               private description: string,
+               private status: number) { }
 
 }

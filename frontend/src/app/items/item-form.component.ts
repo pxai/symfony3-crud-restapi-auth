@@ -24,7 +24,7 @@ export class ItemFormComponent {
   private description: FormControl;
   private status: FormControl;
 
-  constructor (builder: FormBuilder) {
+  constructor (private itemsService: ItemsService, builder: FormBuilder) {
     this.id = new FormControl('', []);
     this.name = new FormControl('', []);
     this.description = new FormControl('', []);
@@ -40,8 +40,8 @@ export class ItemFormComponent {
   public save () {
     console.log('Saving form');
     console.log(this.name);
-    item = new Item(1, 'Try', 'And it Works', 5);
-    this._ItemsService.saveItem(item);
+    let item = new Item(1, 'Try', 'And it Works', 5);
+    this.itemsService.saveItem(item);
   }
 
   public toggleForm () {
