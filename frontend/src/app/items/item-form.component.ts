@@ -5,8 +5,10 @@ import {
   FormBuilder,
   FormControl
 } from '@angular/forms';
+import { ItemsService } from './items.service';
 
-import { Item }    from './item';
+import { Item } from './item';
+
 @Component({
   selector: 'my-items-form',
   templateUrl: './item-form.component.html',
@@ -38,6 +40,8 @@ export class ItemFormComponent {
   public save () {
     console.log('Saving form');
     console.log(this.name);
+    item = new Item(1, 'Try', 'And it Works', 5);
+    this._ItemsService.saveItem(item);
   }
 
   public toggleForm () {
