@@ -23,6 +23,8 @@ export class ItemFormComponent {
   private name: FormControl;
   private description: FormControl;
   private status: FormControl;
+  private item: Item;
+  private errorMessage: string;
 
   constructor (private itemsService: ItemsService, builder: FormBuilder) {
     this.id = new FormControl('', []);
@@ -40,8 +42,11 @@ export class ItemFormComponent {
   public save () {
     console.log('Saving form');
     console.log(this.name);
-    let item = new Item(1, 'Try', 'And it Works', 5);
-    this.itemsService.saveItem(item);
+    var item = new Item(1, 'Try', 'And it Works', 5);
+    this.itemsService.saveItem(item).subscribe(
+                    item => this.item = item,
+                    error => this.errorMessage = <any>error,
+                    () => console.log('Working now'));;
   }
 
   public toggleForm () {

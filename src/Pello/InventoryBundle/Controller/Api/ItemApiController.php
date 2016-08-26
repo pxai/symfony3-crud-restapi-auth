@@ -27,17 +27,21 @@ class ItemApiController extends Controller
         $this->serializer = new Serializer($normalizers, $encoders);
     }
 
+    private function response ($data) {
+      $response = new Response($this->serializer->serialize($data, 'json'));
+      $response->headers->set('Content-Type','application/json');
+      $response->headers->set('Access-Control-Allow-Headers', 'origin, content-type, accept');
+      $response->headers->set('Access-Control-Allow-Origin', '*');
+      return $response;
+    }
+
     /**
      * @Route("/admin/api/item", name="api_item_index")
      */
     public function indexApiAction()
     {
         $items = $this->get("pello_inventory.bo.item")->selectAll();
-        $response = new Response($this->serializer->serialize($items, 'json'));
-        $response->headers->set('Content-Type','application/json');
-        $response->headers->set('Access-Control-Allow-Headers', 'origin, content-type, accept');
-        $response->headers->set('Access-Control-Allow-Origin', '*');
-        return $response;
+        return $this->response($items);
     }
 
     /**
@@ -47,43 +51,31 @@ class ItemApiController extends Controller
     public function itemDetailAction($id)
     {
         $item = $this->get("pello_inventory.bo.item")->selectById($id);
-        $response = new Response($this->serializer->serialize($item, 'json'));
-        $response->headers->set('Content-Type','application/json');
-        $response->headers->set('Access-Control-Allow-Headers', 'origin, content-type, accept');
-        $response->headers->set('Access-Control-Allow-Origin', '*');
-        return $response;
+        return $this->response($item);
     }
 
-//     /**
-//     *
-//     * @Route("/admin/api/item/new", name="item_new")
-//     */
-//    public function itemNewAction()
-//    {
-//        $form = $this->createForm(ItemType::class);
-//        return $this->render('PelloInventoryBundle:Item:new.html.twig', array('form'=> $form->createView()));
-//    }
-//
-//     /**
-//     *
-//     * @Route("/admin/api/item/new/save", name="api_item_new_save")
-//     * @Method({"POST"})
-//     */
-//    public function itemNewSaveAction(Request $request)
-//    {
-//        $form = $this->createForm(ItemType::class, new Item());
-//        $form->handleRequest($request);
-//
-//        if ($form->isValid()) {
-//            $item = $form->getData();
-//            $this->get("pello_inventory.bo.item")->create($item);
-//            $response =  $this->render('PelloInventoryBundle:Item:newSave.html.twig', array('item' => $item));
-//        } else {
-//            $response = $this->render('PelloInventoryBundle:Item:new.html.twig', array('form'=> $form->createView()));
-//        }
-//        return $response;
-//    }
-//
+
+
+    /**
+    *
+    * @Route("/admin/api/item/new/save", name="api_item_new_save")
+    * @Method({"POST","OPTIONS"})
+    */
+   public function itemNewSaveAction(Request $request)
+   {
+       $form = $this->createForm(ItemType::class, new Item());
+       $form->handleRequest($request);
+       $item = $form->getData();
+
+       if ($form->isValid()) {
+
+           $this->get("pello_inventory.bo.item")->create($item);
+           return $this->response($item);
+       } else {
+         return $this->response("{'status':'Error', 'item': 'Error'}");
+       }
+   }
+
 //
 //    /**
 //     *

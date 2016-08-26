@@ -13,6 +13,6 @@
   <label for="status">Status</label>
   <input type="text" name="status" id="status" [formControl]="status" >
 
-  <button type="submit" [disabled]="!itemForm.valid">Create</button>
+  <button [disabled]="!itemForm.valid">Create</button>
 </form>
 </div>

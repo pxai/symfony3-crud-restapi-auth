@@ -1,4 +1,4 @@
-import { Http, Response } from '@angular/http';
+import { Http, Response, RequestOptions } from '@angular/http';
 import {Headers} from '@angular/http';
 import {Observable} from 'rxjs/Rx';
 
@@ -17,7 +17,8 @@ export class ItemsService {
 //  private items: Item[] = [{id: 1, name: 'epa', description: 'epa1'}, {id: 2, name:'epa2', description: 'epa2'}];
   private itemsUrl: string = 'http://localhost/symfony3-crud-restapi-auth/web/app_dev.php/admin/api/item';
   private itemUrl: string = 'http://localhost/symfony3-crud-restapi-auth/web/app_dev.php/admin/api/item/detail';
-  private itemSaveUrl: string = 'http://localhost/symfony3-crud-restapi-auth/web/app_dev.php/admin/api/item/save';
+  private itemSaveUrl: string = 'http://localhost/symfony3-crud-restapi-auth/web/app_dev.php/admin/api/item/new/save';
+  private itemUpdateUrl: string = 'http://localhost/symfony3-crud-restapi-auth/web/app_dev.php/admin/api/item/update/save';
 
   constructor (http: Http) {
     this.http = http;
@@ -77,12 +78,12 @@ public getItem(id: number): Observable<Item> {
     return Observable.throw(errMsg);
   }
 
- public saveItem(item: Item) {
-   console.log(item);
-  /*  let headers = new Headers();
-    headers.append('Content-type', 'application/json');
-    return this.http.post(itemSaveUrl, JSON.stringify(item), {headers: headers})
-        .map(result => result.json());*/
+ public saveItem(item: Item): Observable<Item> {
+    console.log('Saving item: ' + item);
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+    return this.http.post(this.itemSaveUrl, JSON.stringify(item), options)
+        .map(result => result.json());
   }
 
 /*
