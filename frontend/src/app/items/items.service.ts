@@ -80,9 +80,11 @@ public getItem(id: number): Observable<Item> {
 
  public saveItem(item: Item): Observable<Item> {
     console.log('Saving item: ' + item);
+    let itemForSymfony = {};
+    itemForSymfony['item'] = item;
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
-    return this.http.post(this.itemSaveUrl, JSON.stringify(item), options)
+    return this.http.post(this.itemSaveUrl, JSON.stringify(itemForSymfony), options)
         .map(result => result.json());
   }
 

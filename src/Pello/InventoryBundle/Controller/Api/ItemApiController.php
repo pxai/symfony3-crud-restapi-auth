@@ -45,7 +45,6 @@ class ItemApiController extends Controller
     public function indexApiAction()
     {
         $items = $this->get("pello_inventory.bo.item")->selectAll();
-        //return $this->response($items);
         return $items;
     }
 
