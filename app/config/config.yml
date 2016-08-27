@@ -69,6 +69,7 @@ swiftmailer:
 
 # FOS Rest config
 fos_rest:
+    disable_csrf_role: ROLE_API
     param_fetcher_listener: true
     format_listener:
         rules:

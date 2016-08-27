@@ -90,3 +90,10 @@ Changes to kernel
 new JMS\SerializerBundle\JMSSerializerBundle(),
 new FOS\RestBundle\FOSRestBundle(),
 ```
+
+# Trying the api
+With httpie.org
+```
+http http://localhost/symfony3-crud-restapi-auth/web/app_dev.php/admin/api/item  --json
+http http://localhost/symfony3-crud-restapi-auth/web/app_dev.php/admin/api/item/detail/2  --json
+http POST http://localhost/symfony3-crud-restapi-auth/web/app_dev.php/admin/api/item/new/save  --json < item.json

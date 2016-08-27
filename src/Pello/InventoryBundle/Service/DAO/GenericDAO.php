@@ -9,17 +9,17 @@ use Doctrine\ORM\EntityManager;
  * @author Pello Altadill
  */
 abstract class GenericDAO {
-    
+
     protected $entityType;
     protected $em;
-    
+
     function __construct($entityType, EntityManager $em) {
         $this->entityType = $entityType;
         $this->em = $em;
     }
-    
+
     /**
-     * select one 
+     * select one
      * @param type $id
      */
     public function selectById($id) {
@@ -34,34 +34,34 @@ abstract class GenericDAO {
     public function selectBy($params) {
         return $this->em->getRepository($this->entityType)->findOneBy($params);
     }
-    
+
     /**
      * select all items
      */
     public function selectAll() {
-        return $this->em->getRepository($this->entityType)->findItems();        
+        return $this->em->getRepository($this->entityType)->findItems();
     }
-    
+
     /**
      * create one Item entity
      * @param Item $entity
      */
     public function create($entity) {
-        $this->em->merge($entity);
+        $this->em->persist($entity);
         $this->em->flush();
-        
+
         return $entity->getId();
     }
-    
+
     /**
      * update Item
      * @param $entity
      */
     public function update ($entity) {
         $this->em->merge($entity);
-        $this->em->flush();        
+        $this->em->flush();
     }
-    
+
     /**
      * remove entity
      * @param $entity

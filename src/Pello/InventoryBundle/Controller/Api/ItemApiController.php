@@ -8,6 +8,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\Controller\Annotations as Rest;
+use FOS\RestBundle\View\View;
+
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
@@ -67,7 +69,38 @@ class ItemApiController extends Controller
     */
    public function itemNewSaveAction(Request $request)
    {
-       $form = $this->createForm(ItemType::class, new Item());
+     $statusCode = 201;
+
+     $form = $this->createForm(ItemType::class, new Item());
+     $form->handleRequest($request);
+
+     $this->get('logger')->info('Here we go.');
+
+       if ($form->isValid()) {
+           $item = $form->getData();
+           $this->get('logger')->info('ITS CORRECT: ' . $this->serializer->serialize($item, 'json'));
+
+           $this->get("pello_inventory.bo.item")->create($item);
+
+
+           $response = new Response();
+           $response->setStatusCode($statusCode);
+
+           // set the `Location` header only when creating new resources
+        /*   if (201 === $statusCode) {
+               $response->headers->set('Location',
+                   $this->generateUrl(
+                       'acme_demo_user_get', array('id' => $item->getId()),
+                       true // absolute
+                   )
+               );
+           }*/
+
+           return $response;
+       }
+           $this->get('logger')->info('NOT CORRECT');
+       return View::create($form, 400);
+    /*   $form = $this->createForm(ItemType::class, new Item());
        $form->handleRequest($request);
        $item = $form->getData();
       $this->get("logger")->info('This is what we have in POST: ' . $this->serializer->serialize($item, 'json'));
@@ -78,6 +111,7 @@ class ItemApiController extends Controller
        //} else {
          //return $this->response("{'status':'Error', 'item': 'Error'}");
        //}
+       */
    }
 
 //

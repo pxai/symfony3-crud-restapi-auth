@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Pello\InventoryBundle\Form\Type;
 
@@ -21,10 +21,11 @@ class ItemType extends AbstractType {
             ->add('status', TextType::class)
             ->add('save', SubmitType::class);
     }
-    
+
     public function setDefaultOptions(OptionsResolverInterface $resolver) {
         $resolver->setDefaults(array(
             'data_class' => 'Pello\InventoryBundle\Entity\Item',
+            'csrf_protection' => false,
         ));
     }
 
