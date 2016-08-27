@@ -16,29 +16,29 @@ class Item extends Entity
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-    
+
      /**
      * @ORM\Column(name="name",type="string", length=100)
      */
     private $name;
-  
+
     /**
      * @ORM\Column(name="description",type="string", length=255)
      */
     private $description;
-    
+
     /**
      * @ORM\Column(name="last_update",type="datetime", length=255)
      */
     private $lastUpdate;
 
-    
+
     /**
      * @ORM\Column(name="status",type="integer")
      */
     private $status;
 
-    
+
     public function __construct () {
         $this->lastUpdate = new \DateTime();
     }
@@ -47,9 +47,9 @@ class Item extends Entity
     *
     */
     public function getId () {
-      return $this->id;  
+      return $this->id;
     }
-    
+
     /**
     *
     */
@@ -58,14 +58,14 @@ class Item extends Entity
         return $this;
     }
 
-    
+
     /**
     *
     */
     public function getName () {
-      return $this->name;  
+      return $this->name;
     }
-    
+
     /**
     *
     */
@@ -98,5 +98,5 @@ class Item extends Entity
     }
 
 
-   
+
 }

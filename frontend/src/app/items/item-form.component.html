@@ -1,4 +1,4 @@
-<button (click)="toggleForm()">New item</button>
+<button [disabled]="isVisible" (click)="toggleForm()">New item</button>
 <div  [hidden]="!isVisible">
   <form [formGroup]="itemForm" (ngSubmit)="save()">
 

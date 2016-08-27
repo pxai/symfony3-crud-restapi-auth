@@ -19,11 +19,12 @@ DirectoryIndex app.php
 
 # Pello This is what finally worked
 # https://github.com/mgonto/restangular/issues/368
-<ifModule mod_headers.c>
-    Header set Access-Control-Allow-Origin "*"
-    Header always set Access-Control-Allow-Headers "X-Requested-With, Content-Type, Origin, Authorization, Accept, Client-Security-Token, Accept-Encoding"
-    Header always set Access-Control-Allow-Methods "POST, GET, PUT, DELETE, OPTIONS"
-</ifModule>
+#<ifModule mod_headers.c>
+#    Header always set Access-Control-Allow-Origin "*"
+#    Header always set Access-Control-Allow-Credentials "true"
+#    Header always set Access-Control-Allow-Headers "X-Requested-With, Content-Type, Origin, Authorization, Accept, Client-Security-Token, Accept-Encoding"
+#    Header always set Access-Control-Allow-Methods "POST, GET, PUT, DELETE, OPTIONS"
+#</ifModule>
 
 <IfModule mod_rewrite.c>
     RewriteEngine On
@@ -34,13 +35,13 @@ DirectoryIndex app.php
     # Check also for symfony: https://github.com/mgonto/restangular/issues/368
     # In my case this allowed the OPTIONS petition but then it did not
     # go on with the POST request.
-  #  RewriteCond %{REQUEST_METHOD} OPTIONS
-  #  RewriteRule ^(.*)$ $1 [R=200,L,E=HTTP_ORIGIN:%{HTTP:ORIGIN}]]
-  #  Header set Access-Control-Allow-Origin "*"
-  #  Header always set Access-Control-Allow-Credentials "true"
-  #  Header always set Access-Control-Max-Age "1000"
-  #  Header always set Access-Control-Allow-Headers "X-Requested-With, Content-Type, Origin, Authorization, Accept, Client-Security-Token, Accept-Encoding"
-  #  Header always set Access-Control-Allow-Methods "POST, GET, OPTIONS, DELETE, PUT"
+    RewriteCond %{REQUEST_METHOD} OPTIONS
+    RewriteRule ^(.*)$ $1 [R=200,L,E=HTTP_ORIGIN:%{HTTP:ORIGIN}]]
+    Header set Access-Control-Allow-Origin "*"
+    Header always set Access-Control-Allow-Credentials "true"
+    Header always set Access-Control-Max-Age "1000"
+    Header always set Access-Control-Allow-Headers "X-Requested-With, Content-Type, Origin, Authorization, Accept, Client-Security-Token, Accept-Encoding"
+    Header always set Access-Control-Allow-Methods "POST, GET, OPTIONS, DELETE, PUT"
 
     # Determine the RewriteBase automatically and set it as environment variable.
     # If you are using Apache aliases to do mass virtual hosting or installed the

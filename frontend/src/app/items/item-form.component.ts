@@ -46,7 +46,7 @@ export class ItemFormComponent {
     this.itemsService.saveItem(item).subscribe(
                     item => this.item = item,
                     error => this.errorMessage = <any>error,
-                    () => console.log('Working now'));;
+                    () => console.log('Working now'));
   }
 
   public toggleForm () {

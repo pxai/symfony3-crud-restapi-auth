@@ -12,10 +12,10 @@ OK  Symfony 3.1.2 was successfully installed. Now you can:
         2. Browse to the http://localhost:8000 URL.
 
     * Read the documentation at http://symfony.com/doc
-    
-    
+
+
     Don't forget to add Bundle in app/KernelApp.php
-    and to add routes in routes.yml 
+    and to add routes in routes.yml
     app:
     resource: "@PelloInventoryBundle/Controller/"
     type:     annotation
@@ -79,4 +79,14 @@ You can install the component in 2 different ways:
 ```
 $ composer require symfony/serializer
 ```
+# REST requirements
 
+```
+composer require jms/serializer-bundle
+composer require friendsofsymfony/rest-bundle
+```
+Changes to kernel
+```
+new JMS\SerializerBundle\JMSSerializerBundle(),
+new FOS\RestBundle\FOSRestBundle(),
+```

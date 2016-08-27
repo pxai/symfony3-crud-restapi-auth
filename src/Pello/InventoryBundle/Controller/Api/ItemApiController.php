@@ -20,14 +20,15 @@ class ItemApiController extends Controller
 
         private $serializer;
 
+
     public function __construct () {
         $encoders = array(new JsonEncoder());
         $normalizers = array(new ObjectNormalizer());
-
         $this->serializer = new Serializer($normalizers, $encoders);
     }
 
     private function response ($data) {
+      //$this->get('logger')->info('This is what we have: ' . $this->serializer->serialize($data, 'json'));
       $response = new Response($this->serializer->serialize($data, 'json'));
       $response->headers->set('Content-Type','application/json');
       $response->headers->set('Access-Control-Allow-Headers', 'origin, content-type, accept');
@@ -59,21 +60,21 @@ class ItemApiController extends Controller
     /**
     *
     * @Route("/admin/api/item/new/save", name="api_item_new_save")
-    * @Method({"POST","OPTIONS"})
+    * @Method({"POST"})
     */
    public function itemNewSaveAction(Request $request)
    {
        $form = $this->createForm(ItemType::class, new Item());
        $form->handleRequest($request);
        $item = $form->getData();
-
-       if ($form->isValid()) {
+      $this->get("logger")->info('This is what we have in POST: ' . $this->serializer->serialize($item, 'json'));
+      // if ($form->isValid()) {
 
            $this->get("pello_inventory.bo.item")->create($item);
            return $this->response($item);
-       } else {
-         return $this->response("{'status':'Error', 'item': 'Error'}");
-       }
+       //} else {
+         //return $this->response("{'status':'Error', 'item': 'Error'}");
+       //}
    }
 
 //
