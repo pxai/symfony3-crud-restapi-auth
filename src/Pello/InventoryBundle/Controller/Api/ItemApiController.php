@@ -7,7 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-
+use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
@@ -38,21 +38,24 @@ class ItemApiController extends Controller
 
     /**
      * @Route("/admin/api/item", name="api_item_index")
+     * @Rest\View
      */
     public function indexApiAction()
     {
         $items = $this->get("pello_inventory.bo.item")->selectAll();
-        return $this->response($items);
+        //return $this->response($items);
+        return $items;
     }
 
     /**
      *
      * @Route("/admin/api/item/detail/{id}", name="api_item_detail")
+     * @Rest\View
      */
     public function itemDetailAction($id)
     {
         $item = $this->get("pello_inventory.bo.item")->selectById($id);
-        return $this->response($item);
+        return $item;
     }
 
 

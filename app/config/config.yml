@@ -66,3 +66,21 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+# FOS Rest config
+fos_rest:
+    param_fetcher_listener: true
+    format_listener:
+        rules:
+            fallback_format: json
+            prefer_extension: false
+            priorities: [json, jsonp]
+    view:
+        view_response_listener: force
+        formats:
+            json: true
+            jsonp: true
+            xml: false
+            rss: false
+            html: false
+        failed_validation: HTTP_BAD_REQUEST
