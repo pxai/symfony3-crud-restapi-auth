@@ -25,6 +25,7 @@ export class ItemFormComponent {
   private status: FormControl;
   private item: Item;
   private errorMessage: string;
+  private isUpdate: boolean = false;
 
   constructor (private itemsService: ItemsService, builder: FormBuilder) {
     this.id = new FormControl('', []);
@@ -37,20 +38,47 @@ export class ItemFormComponent {
       description: this.description,
       status: this.status
     });
+
+  // Note: As of RC.4, Angular forms version 0.2.0, we can't update
+  // the whole model, we update fields one by one 
+    this.itemsService.itemLoaded().subscribe((item: Item) => {
+             console.log('Item loaded: ');
+             console.log(item);
+             this.isVisible = true;
+             this.id.updateValue(item.id);
+             this.name.updateValue(item.name);
+             this.description.updateValue(item.description);
+             this.status.updateValue(item.status);
+             this.isUpdate = true;
+         });
   }
 
   public save () {
     console.log('Saving form');
     console.log(this.name);
     var item = new Item(null, 'Try', 'And it Works', 5);
-    this.itemsService.saveItem(item).subscribe(
-                    item => this.item = item,
-                    error => this.errorMessage = <any>error,
-                    () => console.log('Working now'));
+    if (this.isUpdate) {
+      this.itemsService.updateItem(item).subscribe(
+                      item => this.item = item,
+                      error => this.errorMessage = <any>error,
+                      () => console.log('Working update now'));
+    } else {
+      this.itemsService.saveItem(item).subscribe(
+                      item => this.item = item,
+                      error => this.errorMessage = <any>error,
+                      () => console.log('Working save new now'));
+    }
   }
 
   public toggleForm () {
     this.isVisible = !this.isVisible;
+    this.isUpdate = false;
     console.log('Set to... ' + this.isVisible);
+  }
+
+
+
+  public loadForm (id: number) {
+    console.log('Loading form for number ' + id);
   }
 }

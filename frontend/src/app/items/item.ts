@@ -5,9 +5,20 @@
 */
 export class Item {
 
-  constructor (private id: number,
-               private name: string,
-               private description: string,
-               private status: number) { }
+  id: number;
+  name: string;
+  description: string;
+  status: number;
+
+  constructor ( id: number,
+                name: string,
+                description: string,
+                status: number) { 
+                  this.id = id;
+                  this.name = name;
+                  this.description = description;
+                  this.status = status;
+                }
+
 
 }

@@ -1,6 +1,8 @@
 import { Http, Response, RequestOptions } from '@angular/http';
 import {Headers} from '@angular/http';
-import {Observable} from 'rxjs/Rx';
+//import {Observable} from 'rxjs/Rx';
+import {Subject} from 'rxjs/Subject';
+import {Observable} from 'rxjs/Observable';
 
 import 'rxjs/add/operator/map';
 import { Injectable } from '@angular/core';
@@ -14,6 +16,9 @@ import {Item} from './item';
 export class ItemsService {
   public title: string = 'Angular 2';
   private http: Http;
+  private item: Item;
+  private subject: Subject<Item> = new Subject<Item>();
+
 //  private items: Item[] = [{id: 1, name: 'epa', description: 'epa1'}, {id: 2, name:'epa2', description: 'epa2'}];
   private itemsUrl: string = 'http://localhost/symfony3-crud-restapi-auth/web/app_dev.php/admin/api/item';
   private itemUrl: string = 'http://localhost/symfony3-crud-restapi-auth/web/app_dev.php/admin/api/item/detail';
@@ -23,6 +28,17 @@ export class ItemsService {
 
   constructor (http: Http) {
     this.http = http;
+  }
+
+  public loadItem(item: Item): void {
+     console.log('Loading item... ' + item);
+     this.item = item;
+     this.subject.next(item);
+  }
+
+   public itemLoaded(): Observable<Item> {
+     console.log('Item changed...');
+     return this.subject.asObservable();
   }
 
   // Could be : Observable <User[]>  to get intellisense
@@ -89,6 +105,15 @@ public getItem(id: number): Observable<Item> {
         .map(result => result.json());
   }
 
+ public updateItem(item: Item): Observable<Item> {
+    console.log('Saving item: ' + item);
+    let itemForSymfony = {};
+    itemForSymfony['item'] = item;
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+    return this.http.put(this.itemUpdateUrl, JSON.stringify(itemForSymfony), options)
+        .map(result => result.json());
+  }
 /*
   public update(item) {
     this.http.put('http://localhost:3000/api/user/update', JSON.stringify(item))
