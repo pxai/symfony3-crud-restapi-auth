@@ -43,4 +43,9 @@ export class ItemsComponent implements OnInit {
                        () => console.log('Working now, one item'));
   }
 
+  private deleteItem (id: number) {
+      this._ItemsService.deleteItem(id).subscribe((res) => {
+      });
+  }
+
 }

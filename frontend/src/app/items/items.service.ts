@@ -19,6 +19,7 @@ export class ItemsService {
   private itemUrl: string = 'http://localhost/symfony3-crud-restapi-auth/web/app_dev.php/admin/api/item/detail';
   private itemSaveUrl: string = 'http://localhost/symfony3-crud-restapi-auth/web/app_dev.php/admin/api/item/new/save';
   private itemUpdateUrl: string = 'http://localhost/symfony3-crud-restapi-auth/web/app_dev.php/admin/api/item/update/save';
+  private itemDeleteUrl: string = 'http://localhost/symfony3-crud-restapi-auth/web/app_dev.php/admin/api/item/delete/';
 
   constructor (http: Http) {
     this.http = http;
@@ -94,8 +95,12 @@ public getItem(id: number): Observable<Item> {
         .map(result => result.json());
   }
 
-  public delete(id) {
-    this.http.put('http://localhost:3000/api/user/delete/', '');
-  }
+
 */
+
+  public deleteItem(id) {
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+    return this.http.delete(this.itemDeleteUrl + id, options);
+  }
 }
