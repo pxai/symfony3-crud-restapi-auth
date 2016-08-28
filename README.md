@@ -97,3 +97,4 @@ With httpie.org
 http http://localhost/symfony3-crud-restapi-auth/web/app_dev.php/admin/api/item  --json
 http http://localhost/symfony3-crud-restapi-auth/web/app_dev.php/admin/api/item/detail/2  --json
 http POST http://localhost/symfony3-crud-restapi-auth/web/app_dev.php/admin/api/item/new/save  --json < item.json
+http DELETE http://localhost/symfony3-crud-restapi-auth/web/app_dev.php/admin/api/item/delete/4 --json

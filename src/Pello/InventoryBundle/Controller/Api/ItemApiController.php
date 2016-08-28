@@ -99,19 +99,18 @@ class ItemApiController extends Controller
        }
            $this->get('logger')->info('NOT CORRECT');
        return View::create($form, 400);
-    /*   $form = $this->createForm(ItemType::class, new Item());
-       $form->handleRequest($request);
-       $item = $form->getData();
-      $this->get("logger")->info('This is what we have in POST: ' . $this->serializer->serialize($item, 'json'));
-      // if ($form->isValid()) {
-
-           $this->get("pello_inventory.bo.item")->create($item);
-           return $this->response($item);
-       //} else {
-         //return $this->response("{'status':'Error', 'item': 'Error'}");
-       //}
-       */
    }
+
+        /**
+        *
+        * @Route("/admin/api/item/delete/{id}", name="api_item_delete")
+        * @Method({"DELETE"})
+        * @Rest\View(statusCode=204)
+        */
+       public function itemDeleteAction(Item $item)
+       {
+           $this->get("pello_inventory.bo.item")->remove($item);
+       }
 
 //
 //    /**
@@ -162,14 +161,5 @@ class ItemApiController extends Controller
 //        return $this->render('PelloInventoryBundle:Item:delete.html.twig',array("item"=>$item));
 //    }
 //
-//     /**
-//     *
-//     * @Route("/admin/api/item/delete/save/{id}", name="api_item_delete_confirm")
-//     */
-//    public function itemDeleteSaveAction(Item $item)
-//    {
-//        $this->get("pello_inventory.bo.item")->remove($item);
-//        return $this->indexAction();
-//    }
 //
 }
