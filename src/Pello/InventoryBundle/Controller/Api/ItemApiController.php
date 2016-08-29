@@ -63,7 +63,7 @@ class ItemApiController extends Controller
 
     /**
     *
-    * @Route("/admin/api/item/new/save", name="api_item_new_save")
+    * @Route("/admin/api/item/create", name="api_item_new_save")
     * @Method({"POST"})
     */
    public function itemNewSaveAction(Request $request)
@@ -112,26 +112,45 @@ class ItemApiController extends Controller
            $this->get("pello_inventory.bo.item")->remove($item);
        }
 
-//
-//    /**
-//     *
-//     * @Route("/admin/api/item/update/{id}", name="api_item_update", requirements={
-//     *     "id": "\d+"}))
-//     */
-//    public function itemUpdateAction($id)
-//    {
-//       $item = $this->get("pello_inventory.bo.item")->selectById($id);
-//       $form = $this->createForm(ItemType::class, $item);
-//       return $this->render('PelloInventoryBundle:Item:update.html.twig',array("form"=> $form->createView(),'msg'=> 'yes'));
-//    }
-//
+
+/**
+    *
+    * @Route("/admin/api/item/update", name="api_item_update_save")
+    * Method({"PUT"})
+    */
+   public function itemUpdateSaveAction(Request $request)
+   {
+     $statusCode = 201;
+
+     $form = $this->createForm(ItemType::class, new Item());
+     $form->handleRequest($request);
+
+     $this->get('logger')->info('Update, Here we go.');
+
+       if ($form->isValid()) {
+           $item = $form->getData();
+           $this->get('logger')->info('ITS CORRECT: ' . $this->serializer->serialize($item, 'json'));
+
+           $this->get("pello_inventory.bo.item")->update($item);
+
+
+           $response = new Response();
+           $response->setStatusCode($statusCode);
+
+           return $response;
+       }
+           $this->get('logger')->info('NOT CORRECT');
+       return View::create($form, 400);
+   }
+
+
 //
 //     /**
 //     *
-//     * @Route("/admin/api/item/update/save", name="api_item_update_save")
-//     * Method({"POST"})
+//     * @Route("/admin/api/item/update", name="api_item_update_save")
+//     * Method({"PUT"})
 //     */
-//    public function itemUpdateSaveAction(Request $request)
+//    public function itemUpdateSaveAction(Item $item)
 //    {
 //       $form = $this->createForm(ItemType::class, new Item());
 //       $form->handleRequest($request);

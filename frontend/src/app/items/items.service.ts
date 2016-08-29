@@ -22,8 +22,8 @@ export class ItemsService {
 //  private items: Item[] = [{id: 1, name: 'epa', description: 'epa1'}, {id: 2, name:'epa2', description: 'epa2'}];
   private itemsUrl: string = 'http://localhost/symfony3-crud-restapi-auth/web/app_dev.php/admin/api/item';
   private itemUrl: string = 'http://localhost/symfony3-crud-restapi-auth/web/app_dev.php/admin/api/item/detail';
-  private itemSaveUrl: string = 'http://localhost/symfony3-crud-restapi-auth/web/app_dev.php/admin/api/item/new/save';
-  private itemUpdateUrl: string = 'http://localhost/symfony3-crud-restapi-auth/web/app_dev.php/admin/api/item/update/save';
+  private itemSaveUrl: string = 'http://localhost/symfony3-crud-restapi-auth/web/app_dev.php/admin/api/item/create';
+  private itemUpdateUrl: string = 'http://localhost/symfony3-crud-restapi-auth/web/app_dev.php/admin/api/item/update';
   private itemDeleteUrl: string = 'http://localhost/symfony3-crud-restapi-auth/web/app_dev.php/admin/api/item/delete/';
 
   constructor (http: Http) {
@@ -106,7 +106,7 @@ public getItem(id: number): Observable<Item> {
   }
 
  public updateItem(item: Item): Observable<Item> {
-    console.log('Saving item: ' + item);
+    console.log('Updating item: ' + item);
     let itemForSymfony = {};
     itemForSymfony['item'] = item;
     let headers = new Headers({ 'Content-Type': 'application/json' });

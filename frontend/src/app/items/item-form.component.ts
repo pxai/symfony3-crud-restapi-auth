@@ -56,9 +56,11 @@ export class ItemFormComponent {
   public save () {
     console.log('Saving form');
     console.log(this.name);
-    var item = new Item(null, 'Try', 'And it Works', 5);
+    var item = new Item(this.id.value, this.name.value, this.description.value, this.status.value);
+    
     if (this.isUpdate) {
-      this.itemsService.updateItem(item).subscribe(
+
+          this.itemsService.updateItem(item).subscribe(
                       item => this.item = item,
                       error => this.errorMessage = <any>error,
                       () => console.log('Working update now'));
