@@ -18,6 +18,7 @@ export class ItemsService {
   private http: Http;
   private item: Item;
   private subject: Subject<Item> = new Subject<Item>();
+  private deleteSubject: Subject<Item> = new Subject<Item>();
 
 //  private items: Item[] = [{id: 1, name: 'epa', description: 'epa1'}, {id: 2, name:'epa2', description: 'epa2'}];
   private itemsUrl: string = 'http://localhost/symfony3-crud-restapi-auth/web/app_dev.php/admin/api/item';
@@ -25,6 +26,12 @@ export class ItemsService {
   private itemSaveUrl: string = 'http://localhost/symfony3-crud-restapi-auth/web/app_dev.php/admin/api/item/create';
   private itemUpdateUrl: string = 'http://localhost/symfony3-crud-restapi-auth/web/app_dev.php/admin/api/item/update';
   private itemDeleteUrl: string = 'http://localhost/symfony3-crud-restapi-auth/web/app_dev.php/admin/api/item/delete/';
+  
+  itemDeletedSource = new Subject<Item>();
+  itemDetailsSource = new Subject<Item>();
+  // Observable item actions
+  itemDeleted = this.itemDeletedSource.asObservable();
+  itemDetail = this.itemDetailsSource.asObservable();
 
   constructor (http: Http) {
     this.http = http;
@@ -36,7 +43,7 @@ export class ItemsService {
      this.subject.next(item);
   }
 
-   public itemLoaded(): Observable<Item> {
+  public itemLoaded(): Observable<Item> {
      console.log('Item changed...');
      return this.subject.asObservable();
   }

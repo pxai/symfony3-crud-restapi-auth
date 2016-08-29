@@ -21,6 +21,10 @@ export class ItemsComponent implements OnInit {
 
   constructor(ItemsService: ItemsService) {
    this._ItemsService = ItemsService;
+       this._ItemsService.itemDeleted.subscribe(
+         item => {
+          console.log('Item has been deleted: ' + item.id);
+       });
   }
 
   public ngOnInit() {
@@ -48,9 +52,6 @@ export class ItemsComponent implements OnInit {
        this._ItemsService.loadItem(item);
   }
   
-  private deleteItem (id: number) {
-      this._ItemsService.deleteItem(id).subscribe((res) => {
-      });
-  }
+
 
 }
