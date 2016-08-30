@@ -17,13 +17,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let item of items">
-                    <td>{{item.id}}</td>
-                    <td>{{item.name}}</td>
-                    <td>{{item.description}}</td>
-                    <td><button (click)="getItem(item.id)">Detail</button></td>
-                    <td><button (click)="loadItem(item)">Update</button></td>
-                    <td><button (click)="deleteItem(item.id)">Delete</button></td>
+                  <tr *ngFor="let item of items" [item-row]="item">
                   </tr>
                 </tbody>
                 <tfoot>

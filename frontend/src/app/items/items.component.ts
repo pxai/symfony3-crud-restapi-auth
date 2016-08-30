@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ItemsService } from './items.service';
 import { Item } from './item';
 import { ItemFormComponent } from './item-form.component';
+import { ItemRowComponent } from './item-row.component';
 
 @Component({
   selector: 'my-items',
   providers: [ItemsService],
-  directives: [ItemFormComponent],
+  directives: [ItemFormComponent, ItemRowComponent],
   templateUrl: './items.component.html',
   styleUrls: ['./items.component.scss']
 })
