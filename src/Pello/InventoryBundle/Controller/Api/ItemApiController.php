@@ -69,7 +69,7 @@ class ItemApiController extends Controller
    public function itemNewSaveAction(Request $request)
    {
      $statusCode = 201;
-
+        $this->get('logger')->info($request);
      $form = $this->createForm(ItemType::class, new Item());
      $form->handleRequest($request);
 
@@ -116,16 +116,17 @@ class ItemApiController extends Controller
 /**
     *
     * @Route("/admin/api/item/update", name="api_item_update_save")
-    * Method({"PUT"})
+    * @Method({"PUT"})
+    * @Rest\View(statusCode=204)
     */
    public function itemUpdateSaveAction(Request $request)
    {
-     $statusCode = 201;
-
-     $form = $this->createForm(ItemType::class, new Item());
+      $statusCode = 201;
+        $this->get('logger')->info($request);
+     $form = $this->createForm(ItemType::class, new Item(),array('method' => 'PUT'));
      $form->handleRequest($request);
 
-     $this->get('logger')->info('Update, Here we go.');
+     $this->get('logger')->info('Here we go with update.');
 
        if ($form->isValid()) {
            $item = $form->getData();
@@ -139,8 +140,9 @@ class ItemApiController extends Controller
 
            return $response;
        }
-           $this->get('logger')->info('NOT CORRECT');
+           $this->get('logger')->info('UPDATE NOT CORRECT');
        return View::create($form, 400);
+        
    }
 
 

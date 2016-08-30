@@ -8,12 +8,12 @@ export class Item {
   id: number;
   name: string;
   description: string;
-  status: number;
+  status: string;
 
   constructor ( id: number,
                 name: string,
                 description: string,
-                status: number) { 
+                status: string) { 
                   this.id = id;
                   this.name = name;
                   this.description = description;
