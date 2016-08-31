@@ -1,6 +1,8 @@
 // Helper: root(), and rootDir() are defined at the bottom
 var path = require('path');
 var webpack = require('webpack');
+var webDir = 'frontend/';
+var destDir = '../../frontend';
 
 // Webpack Plugins
 var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
@@ -53,12 +55,13 @@ module.exports = function makeWebpackConfig() {
   /**
    * Output
    * Reference: http://webpack.github.io/docs/configuration.html#output
+   *     path: root('dist'),
    */
   config.output = isTest ? {} : {
-    path: root('dist'),
+    path: root(destDir),
     publicPath: isProd ? '/' : 'http://localhost:8080/',
-    filename: isProd ? 'js/[name].[hash].js' : 'js/[name].js',
-    chunkFilename: isProd ? '[id].[hash].chunk.js' : '[id].chunk.js'
+    filename: isProd ? webDir + 'js/[name].[hash].js' : webDir + 'js/[name].js',
+    chunkFilename: isProd ? webDir + '[id].[hash].chunk.js' : webDir + '[id].chunk.js'
   };
 
   /**
