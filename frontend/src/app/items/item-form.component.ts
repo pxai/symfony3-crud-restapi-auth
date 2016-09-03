@@ -41,7 +41,7 @@ export class ItemFormComponent {
 
   // Note: As of RC.4, Angular forms version 0.2.0, we can't update
   // the whole model, we update fields one by one 
-    this.itemsService.itemLoaded().subscribe((item: Item) => {
+    this.itemsService.itemLoadUpdate.subscribe((item: Item) => {
              console.log('Item loaded: ');
              console.log(item);
              this.isVisible = true;
@@ -63,6 +63,7 @@ export class ItemFormComponent {
       this.itemsService.updateItem(item).subscribe(
                       item => {
                         this.item = item;
+                        this.isVisible = false;
                         this.itemsService.itemUpdatedSource.next(item);
                       },
                       error => this.errorMessage = <any>error,
@@ -71,6 +72,8 @@ export class ItemFormComponent {
       this.itemsService.saveItem(item).subscribe(
                       item => {
                         this.item = item;
+                        this.isVisible = false;
+                        console.log('saved');
                         this.itemsService.itemInsertedSource.next(item);
                       },
                       error => this.errorMessage = <any>error,

@@ -30,6 +30,28 @@ export class ItemsComponent implements OnInit {
                 }
             }
        });
+
+      this._ItemsService.itemInserted.subscribe(
+         item => {
+          console.log('New item has been inserted: ' + item.id);
+          this.items.push(item);
+       });
+
+      this._ItemsService.itemUpdated.subscribe(
+         item => {
+          console.log('Item has been updated: ' + item.id);
+          for (var i = 0; i < this.items.length; i++) {
+                if (this.items[i].id == item.id) {
+                    this.items[i] = item;
+                }
+            }
+       });
+
+        this._ItemsService.itemDetail.subscribe(
+         item => {
+          console.log('Item loaded for detail: ' + item.id);
+          this.item = item ;
+       });
   }
 
   public ngOnInit() {
@@ -53,9 +75,7 @@ export class ItemsComponent implements OnInit {
                        () => console.log('Working now, one item'));
   }
 
-  private loadItem (item: Item) {
-       this._ItemsService.loadItem(item);
-  }
+ 
   
 
 

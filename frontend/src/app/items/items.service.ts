@@ -30,25 +30,27 @@ export class ItemsService {
   itemDeletedSource = new Subject<Item>();
   itemDetailsSource = new Subject<Item>();
   itemInsertedSource = new Subject<Item>();
+  itemLoadUpdateSource = new Subject<Item>();
   itemUpdatedSource = new Subject<Item>();
 
   // Observable item actions
   itemDeleted = this.itemDeletedSource.asObservable();
   itemDetail = this.itemDetailsSource.asObservable();
   itemInserted = this.itemInsertedSource.asObservable();
+  itemLoadUpdate = this.itemLoadUpdateSource.asObservable();
   itemUpdated = this.itemUpdatedSource.asObservable();
 
   constructor (http: Http) {
     this.http = http;
   }
 
-  public loadItem(item: Item): void {
+  public loadItem(item: Item)  {
      console.log('Loading item... ' + item);
      this.item = item;
-     this.subject.next(item);
+     this.itemDetailsSource.next(item);
   }
 
-  public itemLoaded(): Observable<Item> {
+  public loadItemForUpdate(): Observable<Item> {
      console.log('Item changed...');
      return this.subject.asObservable();
   }
