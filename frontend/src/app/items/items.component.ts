@@ -24,6 +24,11 @@ export class ItemsComponent implements OnInit {
        this._ItemsService.itemDeleted.subscribe(
          item => {
           console.log('Item has been deleted: ' + item.id);
+          for (var i = 0; i < this.items.length; i++) {
+                if (this.items[i].id == item.id) {
+                    this.items.splice(i,1);
+                }
+            }
        });
   }
 

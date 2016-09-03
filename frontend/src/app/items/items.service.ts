@@ -29,9 +29,14 @@ export class ItemsService {
   
   itemDeletedSource = new Subject<Item>();
   itemDetailsSource = new Subject<Item>();
+  itemInsertedSource = new Subject<Item>();
+  itemUpdatedSource = new Subject<Item>();
+
   // Observable item actions
   itemDeleted = this.itemDeletedSource.asObservable();
   itemDetail = this.itemDetailsSource.asObservable();
+  itemInserted = this.itemInsertedSource.asObservable();
+  itemUpdated = this.itemUpdatedSource.asObservable();
 
   constructor (http: Http) {
     this.http = http;
@@ -121,18 +126,11 @@ public getItem(id: number): Observable<Item> {
     return this.http.put(this.itemUpdateUrl, JSON.stringify(itemForSymfony), options)
         .map(result => result.json());
   }
-/*
-  public update(item) {
-    this.http.put('http://localhost:3000/api/user/update', JSON.stringify(item))
-        .map(result => result.json());
-  }
-
-
-*/
 
   public deleteItem(id) {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
     return this.http.delete(this.itemDeleteUrl + id, options);
   }
+
 }

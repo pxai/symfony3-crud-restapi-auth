@@ -61,12 +61,18 @@ export class ItemFormComponent {
 
     if (this.isUpdate) {
       this.itemsService.updateItem(item).subscribe(
-                      item => this.item = item,
+                      item => {
+                        this.item = item;
+                        this.itemsService.itemUpdatedSource.next(item);
+                      },
                       error => this.errorMessage = <any>error,
                       () => console.log('Working update now'));
     } else {
       this.itemsService.saveItem(item).subscribe(
-                      item => this.item = item,
+                      item => {
+                        this.item = item;
+                        this.itemsService.itemInsertedSource.next(item);
+                      },
                       error => this.errorMessage = <any>error,
                       () => console.log('Working save new now'));
     }
