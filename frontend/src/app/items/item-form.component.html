@@ -1,4 +1,5 @@
 <button [disabled]="isVisible" (click)="toggleForm()">New item</button>
+{{errorMessage}}
 <div  [hidden]="!isVisible">
   <form [formGroup]="itemForm" (ngSubmit)="save()">
 

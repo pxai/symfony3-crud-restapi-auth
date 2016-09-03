@@ -95,7 +95,8 @@ class ItemApiController extends Controller
                );
            }*/
 
-           return $response;
+          // return $response;
+          return View::create($item, $statusCode);
        }
            $this->get('logger')->info('NOT CORRECT');
        return View::create($form, 400);
@@ -138,7 +139,8 @@ class ItemApiController extends Controller
            $response = new Response();
            $response->setStatusCode($statusCode);
 
-           return $response;
+          // return $response;
+          return View::create($item, $statusCode);
        }
            $this->get('logger')->info('UPDATE NOT CORRECT');
        return View::create($form, 400);

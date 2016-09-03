@@ -64,9 +64,10 @@ export class ItemFormComponent {
                       item => {
                         this.item = item;
                         this.isVisible = false;
+                        console.log('updated');
                         this.itemsService.itemUpdatedSource.next(item);
                       },
-                      error => this.errorMessage = <any>error,
+                      error => {this.errorMessage = <any>error; console.log('Error on updated')},
                       () => console.log('Working update now'));
     } else {
       this.itemsService.saveItem(item).subscribe(
@@ -76,7 +77,7 @@ export class ItemFormComponent {
                         console.log('saved');
                         this.itemsService.itemInsertedSource.next(item);
                       },
-                      error => this.errorMessage = <any>error,
+                      error => {this.errorMessage = <any>error; console.log('Error on insert')},
                       () => console.log('Working save new now'));
     }
   }
