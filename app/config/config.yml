@@ -76,7 +76,7 @@ fos_rest:
         rules:
             fallback_format: json
             prefer_extension: false
-            priorities: [json, jsonp]
+            priorities: [html, json, jsonp]
     view:
         view_response_listener: force
         formats:
@@ -84,5 +84,5 @@ fos_rest:
             jsonp: true
             xml: false
             rss: false
-            html: false
+            html: true
         failed_validation: HTTP_BAD_REQUEST
